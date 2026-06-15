@@ -65,3 +65,5 @@ public abstract class Funcionario {
 
     public abstract Set<Permissao> getPermissoes();
 }
+
+.

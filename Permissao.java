@@ -10,3 +10,5 @@ public enum Permissao {
     CADASTRAR_PRODUTO,
     APROVAR_PEDIDO
 }
+
+.
