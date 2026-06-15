@@ -35,7 +35,7 @@ public Set<Permissao> getPermissoes() {
 
     public Vendedor(String m, String n, String cpf, double sBase, double percentualComissao) {
         super(m, n, cpf, sBase);
-        this.percentualComissao = pComissao;
+        this.percentualComissao = percentualComissao;
     }
 
 }
