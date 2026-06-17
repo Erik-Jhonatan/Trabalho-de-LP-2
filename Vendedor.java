@@ -1,27 +1,18 @@
-package model.funcionario;
-
+import java.util.EnumSet;
 import java.util.Set;
 
 public class Vendedor extends Funcionario {
 
-    private double percentualComissao;
-
-    public double getPercentualComissao() {
-        return percentualComissao;
+    public Vendedor(String matricula, String nome, String cpf) {
+        super(matricula, nome, cpf);
     }
 
-    public void setPercentualComissao(double percentualComissao) {
-        this.percentualComissao = percentualComissao;
-    }
-
-    @Override
-    public double calcularSalarioTotal(int mes, int ano) {
-        return salarioBase + calcularComissao(mes, ano);
-    }
-
-    @Override
-    public double calcularComissao(int mes, int ano) {
-        return 0;
+    public Set<Permissao> getPermissoes() {
+        return EnumSet.of(
+            Permissao.REALIZAR_VENDA,
+            Permissao.APLICAR_DESCONTO_PADRAO,
+            Permissao.CONSULTAR_ESTOQUE
+        );
     }
 
     @Override
