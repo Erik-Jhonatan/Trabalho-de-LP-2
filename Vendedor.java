@@ -14,4 +14,21 @@ public class Vendedor extends Funcionario {
             Permissao.CONSULTAR_ESTOQUE
         );
     }
+
+    @Override
+public Set<Permissao> getPermissoes() {
+    return Set.of(
+        Permissao.REALIZAR_VENDA,
+        Permissao.APLICAR_DESCONTO_PADRAO,
+        Permissao.CONSULTAR_ESTOQUE
+    );
 }
+
+    public Vendedor(String m, String n, String cpf, double sBase, double percentualComissao) {
+        super(m, n, cpf, sBase);
+        this.percentualComissao = percentualComissao;
+    }
+
+}
+
+.
