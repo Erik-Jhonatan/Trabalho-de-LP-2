@@ -1,0 +1,50 @@
+package model.venda;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class VendaRepository {
+
+    private static final Path ARQUIVO_VENDAS = Path.of("vendas.txt");
+
+    public static void salvarVenda(Venda venda) {
+        if (venda == null || venda.getStatus() == null) {
+            return;
+        }
+
+        String itens = venda.getItensVenda().entrySet().stream()
+                .map(entry -> entry.getKey().getTitulo() + "(" + entry.getValue() + ")")
+                .collect(Collectors.joining(", "));
+
+        String linha = String.format("%s | %s | Cliente: %s | Funcionário: %s | Total: %.2f | Pagamento: %s | Status: %s | Itens: %s%n",
+                venda.getCodigoVenda(),
+                venda.getDataVenda(),
+                venda.getCliente().getNome(),
+                venda.getFuncionario().getNome(),
+                venda.calcularTotal(),
+                venda.getPagamento() != null ? venda.getPagamento().getMetodoPagamento() : "N/A",
+                venda.getStatus(),
+                itens);
+
+        try {
+            Files.writeString(ARQUIVO_VENDAS, linha, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar venda em arquivo: " + e.getMessage());
+        }
+    }
+
+    public static List<String> lerVendas() {
+        try {
+            if (Files.exists(ARQUIVO_VENDAS)) {
+                return Files.readAllLines(ARQUIVO_VENDAS);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler vendas do arquivo: " + e.getMessage());
+        }
+        return List.of();
+    }
+}
